@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create Resume
+{% endblock %}
+
+
+{% block content %}
+
+
+
+{% if request.user.is_authenticated %}
+<script>
+    window.location.href = "{% url 'accounts:profile' %}";
+</script>
+{% endif %}
+<span style="height: 50px;"></span>
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <p class="h4 mb-4 font-weight-bold">Sign In</p>
+
+    {% if form.errors %}
+    <div class="alert alert-primary" role="alert">
+        Error: Username or Password is not correct!
+    </div>
+    {% endif %}
+
+    {{ form.as_p }}
+    <button class="button" type="submit" value="log-in">Sign in</button>
+    <div style="display: flex; margin-top: 10px;">
+        <p class="">
+            <a style="text-decoration: none; padding: 5px;" href="{% url 'password_reset' %}">Forgotten
+                Password?</a>
+        </p>
+        <p class="">
+            <a style="text-decoration: none; padding: 5px;" href="{% url 'accounts:register' %}">New
+                Registration</a>
+        </p>
+</form>
+</div>
+{% endblock %}
+<!-- partial -->
