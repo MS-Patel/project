@@ -1,10 +1,71 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Account Summary
+{% endblock %}
+
 {% block content %}
 
 {% load static %}
-<div style="margin: 20%;">
-    <p>{{ context.full_name }}
-    </p>
+<section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
+                <h1 data-aos="fade-up">Your Data</h1>
+            </div>
+
+            <table>
+                <tr>
+                    <th>
+                        Property
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Name:
+                    </td>
+                    <td>
+                        {{ledger.full_name}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Mobile No:
+                    </td>
+                    <td>
+                        {{ledger.phone}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email id:
+                    </td>
+                    <td>
+                        {{ledger.email}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Account balance:
+                    </td>
+                    <td>
+                        {{ledger.balance}}
+                    </td>
+                </tr>
+            </table>
+</section><!-- End Hero -->
+
+<div style="margin: 10%;">
+    <p>{{ ledger.full_name }}</p>
+    <p>{{ ledger.phone }}</p>
+    <p>{{ ledger.email }}</p>
+    <p>{{ ledger.balance }}</p>
+    <p>{{ ledger }}</p>
 </div>
+
+
 {% endblock %}

@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>FlexStart Bootstrap Template - Index</title>
+    <title>{% block title %}
+
+        {% endblock %}</title>
     <meta content="" name="description">
 
     <meta content="" name="keywords">
@@ -53,7 +55,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="{% url 'bank:home' %}">Home</a></li>
-                    <li><a class="getstarted scrollto" href="{% url 'bank:dataform' %}">Get Started</a></li>
+                    <li><a class="nav-link scrollto active" href="{% url 'bank:dataform' %}">Fill</a></li>
 
                     {% if not request.user.is_authenticated %}
                     <a class="nav-link scrollto active" href="{% url 'login' %}">Login</a>
@@ -89,6 +91,7 @@
 
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 </body>
 

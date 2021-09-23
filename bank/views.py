@@ -35,9 +35,6 @@ def dataform(request):
 
 @login_required
 def show(request):
-
-    ledger = Landing.objects.all().filter(username_id=request.user.id)
-
+    ledger = Landing.objects.get(username_id=request.user.id)
     context = {"ledger": ledger}
-
     return render(request, "show.html", context)
