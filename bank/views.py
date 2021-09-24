@@ -46,7 +46,6 @@ def dataform(request):
 def show(request):
     if request.method == 'POST':
         usr = request.user
-        otp = UserOtp.objects.filter(user=usr).last().otp
         get_otp = request.POST.get('otp')
         if get_otp:
             usr = request.user
@@ -61,8 +60,7 @@ def show(request):
     else:
         usr = User.objects.get(username=request.user)
         usr_otp = random.randint(100000, 999999)
-        UserOtp.objects.create(user=usr, otp=usr_otp)
         sendsms(usr_otp)
+        UserOtp.objects.create(user=usr, otp=usr_otp)
         context = {"otp": True}
-
         return render(request, "show.html", context)
