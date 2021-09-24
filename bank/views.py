@@ -5,6 +5,7 @@ from bank.forms import LandingForm
 from django.contrib.auth.models import User
 from .models import Landing, UserOtp
 import random
+from .send import sendsms
 
 # Create your views here.
 
@@ -45,7 +46,7 @@ def dataform(request):
 def show(request):
     if request.method == 'POST':
         usr = request.user
-        print(UserOtp.objects.filter(user=usr).last().otp)
+        otp = UserOtp.objects.filter(user=usr).last().otp
         get_otp = request.POST.get('otp')
         if get_otp:
             usr = request.user
@@ -61,9 +62,7 @@ def show(request):
         usr = User.objects.get(username=request.user)
         usr_otp = random.randint(100000, 999999)
         UserOtp.objects.create(user=usr, otp=usr_otp)
-        print(usr_otp)
-        mess = f"Hello {usr.username},\nYour OTP for login is {usr_otp}\n Don't Share it with anyone"
-
+        sendsms(usr_otp)
         context = {"otp": True}
 
         return render(request, "show.html", context)
