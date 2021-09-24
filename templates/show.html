@@ -14,7 +14,34 @@ Account Summary
             <div class="col-lg-6 d-flex flex-column justify-content-center">
                 <h1 data-aos="fade-up">Your Data</h1>
             </div>
+            {% if messages %}
+            {% for mess in messages %}
+            {{mess}}
+            <div class="alert alert-warning" role="alert">
+                {{mess}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <br>
+            {% if otp %}
+            <form method="POST" action="{% url 'bank:show' %}">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">OTP</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter Your OTP" aria-label="OTP"
+                        aria-describedby="basic-addon1" name='otp'>
+                </div>
+                <div class="input-group-prepend">
+                    <button class="input-group-text" type="submit">Verify</button>
+                    <small class="float-right text-muted"><i><a href="#" class="text-dark"
+                                onclick="ReSendOTP('{{usr.username}}', 'resendOTPmess')"><i
+                                    id="resendOTPmess">Resend</i> OTP</a></small>
+                </div>
+            </form>
 
+            {% else %}
             <table>
                 <tr>
                     <th>
@@ -57,15 +84,7 @@ Account Summary
                     </td>
                 </tr>
             </table>
+            {% endif %}
 </section><!-- End Hero -->
-
-<div style="margin: 10%;">
-    <p>{{ ledger.full_name }}</p>
-    <p>{{ ledger.phone }}</p>
-    <p>{{ ledger.email }}</p>
-    <p>{{ ledger.balance }}</p>
-    <p>{{ ledger }}</p>
-</div>
-
 
 {% endblock %}

@@ -7,3 +7,6 @@ from . import models
 @admin.register(models.Landing)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('username', 'full_name', 'email', 'phone', 'balance')
+
+
+admin.site.register(models.UserOtp)
