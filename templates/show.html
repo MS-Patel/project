@@ -11,9 +11,6 @@ Account Summary
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up">Your Data</h1>
-            </div>
             {% if messages %}
             {% for mess in messages %}
             {{mess}}
@@ -22,8 +19,14 @@ Account Summary
             </div>
             {% endfor %}
             {% endif %}
-            <br>
+
+
             {% if otp %}
+
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
+                <h1 data-aos="fade-up">Enter OTP </h1>
+            </div>
+            <br>
             <form method="POST" action="{% url 'bank:show' %}">
                 {% csrf_token %}
                 <div class="input-group mb-3">
@@ -42,6 +45,10 @@ Account Summary
             </form>
 
             {% else %}
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
+                <h1 data-aos="fade-up">Your Balance </h1>
+            </div>
+            <br>
             <table>
                 <tr>
                     <th>

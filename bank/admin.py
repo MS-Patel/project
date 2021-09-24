@@ -9,4 +9,6 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ('username', 'full_name', 'email', 'phone', 'balance')
 
 
-admin.site.register(models.UserOtp)
+@admin.register(models.UserOtp)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('user', 'otp')

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from bank.forms import LandingForm
 from django.contrib.auth.models import User
 from .models import Landing, UserOtp
@@ -26,12 +26,19 @@ def dataform(request):
             netbalance = form.cleaned_data['credit'] - \
                 form.cleaned_data['debit']
             data.balance = netbalance
-            data.update()
+            data.save()
             return render(request, "index.html")
 
     else:
-        form = LandingForm()
-    return render(request, "form.html", {'form': form})
+        try:
+            acc = Landing.objects.get(username=request.user)
+        except Landing.DoesNotExist:
+            acc = False
+        if acc:
+            return render(request, 'account.html')
+        else:
+            form = LandingForm()
+            return render(request, "form.html", {'form': form})
 
 
 @login_required
